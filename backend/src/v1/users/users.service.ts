@@ -28,6 +28,14 @@ export class UsersService {
     });
   }
 
+  findOneByUsername(username: string): Promise<User> {
+    return this.userRepository.findOne({
+      where: {
+        username,
+      },
+    });
+  }
+
   update(id: string, updateUserDto: UpdateUserDto): Promise<UpdateResult> {
     return this.userRepository.update(id, updateUserDto);
   }

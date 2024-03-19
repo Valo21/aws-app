@@ -7,9 +7,8 @@ import { UsersModule } from './v1/users/users.module';
 import { ImagesModule } from './v1/images/images.module';
 import { AlbumsModule } from './v1/albums/albums.module';
 import * as process from 'process';
-import { User } from './v1/users/entities/user.entity';
-import { Album } from './v1/albums/entities/album.entity';
-import { Image } from './v1/images/entities/image.entity';
+import { AuthModule } from './v1/auth/auth.module';
+import { UploaderModule } from './v1/uploader/uploader.module';
 
 @Module({
   imports: [
@@ -32,6 +31,8 @@ import { Image } from './v1/images/entities/image.entity';
       logging: 'all',
       autoLoadEntities: true,
     }),
+    AuthModule,
+    UploaderModule,
   ],
   controllers: [AppController],
   providers: [AppService],
