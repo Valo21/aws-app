@@ -1,15 +1,18 @@
-import { Injectable } from '@nestjs/common';
+import {Injectable, UnauthorizedException} from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { Repository, UpdateResult } from 'typeorm';
+import * as bcrypt from "bcrypt";
+import {UploaderService} from "../uploader/uploader.service";
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User)
     private userRepository: Repository<User>,
+    private uploaderService: UploaderService
   ) {}
 
   create(createUserDto: CreateUserDto): Promise<CreateUserDto & User> {
@@ -36,7 +39,24 @@ export class UsersService {
     });
   }
 
-  update(id: string, updateUserDto: UpdateUserDto): Promise<UpdateResult> {
+  async update(id: string, updateUserDto: UpdateUserDto, image: Express.Multer.File | null): Promise<UpdateResult> {
+    const user: User = await this.userRepository.findOne({
+      where: {
+        id
+      }
+    })
+    if (!bcrypt.compareSync(updateUserDto.password, user.password)) {
+      throw new UnauthorizedException();
+    }
+    delete updateUserDto.password;
+
+    if (image) {
+      updateUserDto.image = await this.uploaderService.uploadProfileImage(
+        user.username,
+        image.originalname,
+        image.buffer,
+      );
+    }
     return this.userRepository.update(id, updateUserDto);
   }
 
