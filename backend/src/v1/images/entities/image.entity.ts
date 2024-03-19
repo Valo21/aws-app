@@ -1,12 +1,14 @@
 import {
   Column,
   CreateDateColumn,
+  Entity,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Album } from '../../albums/entities/album.entity';
 
+@Entity('images')
 export class Image {
   @PrimaryGeneratedColumn('uuid')
   public id: string;

@@ -1,5 +1,15 @@
-import { Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+@Entity('users')
 export class User {
+  @PrimaryGeneratedColumn('uuid')
+  public id: string;
+
   @Column({ unique: true })
   public username: string;
 
