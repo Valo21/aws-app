@@ -3,6 +3,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
+import { UsersModule } from './v1/users/users.module';
+import { ImagesModule } from './v1/images/images.module';
+import { AlbumsModule } from './v1/albums/albums.module';
 import * as process from 'process';
 
 @Module({
@@ -23,6 +26,9 @@ import * as process from 'process';
       logging: 'all',
       autoLoadEntities: true,
     }),
+    UsersModule,
+    ImagesModule,
+    AlbumsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
