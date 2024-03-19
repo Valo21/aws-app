@@ -1,26 +1,37 @@
 import { Injectable } from '@nestjs/common';
 import { CreateAlbumDto } from './dto/create-album.dto';
 import { UpdateAlbumDto } from './dto/update-album.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Album } from './entities/album.entity';
+import { Repository, UpdateResult } from 'typeorm';
 
 @Injectable()
 export class AlbumsService {
-  create(createAlbumDto: CreateAlbumDto) {
-    return createAlbumDto;
+  constructor(
+    @InjectRepository(Album)
+    private albumRepository: Repository<Album>,
+  ) {}
+  create(createAlbumDto: CreateAlbumDto): Promise<Album> {
+    return this.albumRepository.save(createAlbumDto);
   }
 
-  findAll() {
-    return `This action returns all albums`;
+  findAll(): Promise<Album[]> {
+    return this.albumRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} album`;
+  findOne(id: string) {
+    return this.albumRepository.findOne({
+      where: {
+        id,
+      },
+    });
   }
 
-  update(id: number, updateAlbumDto: UpdateAlbumDto) {
-    return [id, updateAlbumDto];
+  update(id: string, updateAlbumDto: UpdateAlbumDto): Promise<UpdateResult> {
+    return this.albumRepository.update(id, updateAlbumDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} album`;
+  remove(id: string) {
+    return this.albumRepository.delete(id);
   }
 }
