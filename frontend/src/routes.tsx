@@ -4,6 +4,7 @@ import {AuthLoader} from "./loaders/AuthLoader.ts";
 import AuthPage from "./routes/AuthPage.tsx";
 import Photos from "./routes/Photos.tsx";
 import UploadPage from "./routes/UploadPage.tsx";
+import AlbumsPage from "./routes/AlbumsPage.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ export const router = createBrowserRouter([
       {
         path: '/upload',
         element: <UploadPage/>
+      },
+      {
+        path: '/albums',
+        element: <AlbumsPage/>
       }
     ]
   },
