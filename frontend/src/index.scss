@@ -1,7 +1,8 @@
 @layer tailwind-base, primereact, tailwind-utilities;
 
 @layer tailwind-base {
-  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
 }
 
 @layer tailwind-utilities {
@@ -17,8 +18,12 @@ body {
   padding: 1em 1em 0;
 }
 
-main, button, #root, input {
+main, .p-button, #root, input {
   @apply w-full
+}
+
+.p-button {
+  @apply rounded-full no-underline text-center
 }
 
 #root {
@@ -26,4 +31,9 @@ main, button, #root, input {
   @apply sm:max-w-xl md:max-w-2xl lg:max-w-4xl xl:max-w-7xl;
   transition: max-width;
   transition-duration: 300ms;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  margin-bottom: 0;
 }
