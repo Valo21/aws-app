@@ -1,0 +1,29 @@
+@layer tailwind-base, primereact, tailwind-utilities;
+
+@layer tailwind-base {
+  @tailwind base;
+}
+
+@layer tailwind-utilities {
+  @tailwind components;
+  @tailwind utilities;
+}
+
+body {
+  margin: 0;
+  @apply flex justify-center;
+  min-width: 320px;
+  min-height: 100vh;
+  padding: 1em 1em 0;
+}
+
+main, button, #root, input {
+  @apply w-full
+}
+
+#root {
+  @apply flex justify-center;
+  @apply sm:max-w-xl md:max-w-2xl lg:max-w-4xl xl:max-w-7xl;
+  transition: max-width;
+  transition-duration: 300ms;
+}

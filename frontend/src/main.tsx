@@ -3,15 +3,21 @@ import * as ReactDOM from "react-dom/client";
 import {
   RouterProvider,
 } from "react-router-dom";
-import "./index.css";
+import "./index.scss";
 import {router} from "./routes.tsx";
+import "primereact/resources/themes/bootstrap4-light-blue/theme.css";
+import {PrimeReactProvider} from "primereact/api";
+import {DesignTheme} from "./design.theme.ts";
+
 
 const root: HTMLElement | null = document.getElementById("root");
 
 if (root) {
   ReactDOM.createRoot(root).render(
     <React.StrictMode>
-      <RouterProvider router={router} />
+      <PrimeReactProvider value={{pt: DesignTheme}}>
+        <RouterProvider router={router} />
+      </PrimeReactProvider>
     </React.StrictMode>
   );
 }
