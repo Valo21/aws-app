@@ -14,10 +14,13 @@ export class Image {
   public id: string;
 
   @Column()
+  public name: string;
+
+  @Column()
   public url: string;
 
   @ManyToOne(() => Album, (album) => album.images)
-  public album: string;
+  public album: Album;
 
   @CreateDateColumn()
   public createdAt: Date;

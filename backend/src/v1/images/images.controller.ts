@@ -1,23 +1,35 @@
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Patch,
-  Param,
+  Controller,
   Delete,
+  Get,
+  Param,
+  Post,
+  Req,
+  UploadedFile,
+  UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { ImagesService } from './images.service';
 import { CreateImageDto } from './dto/create-image.dto';
-import { UpdateImageDto } from './dto/update-image.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('v1/images')
 export class ImagesController {
   constructor(private readonly imagesService: ImagesService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Post()
-  async create(@Body() createImageDto: CreateImageDto) {
-    return await this.imagesService.create(createImageDto);
+  @UseInterceptors(FileInterceptor('image'))
+  async create(
+    @Body() createImageDto: CreateImageDto,
+    @UploadedFile() image: Express.Multer.File,
+    @Req() req: Express.Request,
+  ) {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    return await this.imagesService.create(createImageDto, image, req.user.id);
   }
 
   @Get()
@@ -28,14 +40,6 @@ export class ImagesController {
   @Get(':id')
   async findOne(@Param('id') id: string) {
     return await this.imagesService.findOne(id);
-  }
-
-  @Patch(':id')
-  async update(
-    @Param('id') id: string,
-    @Body() updateImageDto: UpdateImageDto,
-  ) {
-    return await this.imagesService.update(id, updateImageDto);
   }
 
   @Delete(':id')

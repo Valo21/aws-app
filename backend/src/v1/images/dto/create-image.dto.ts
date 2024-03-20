@@ -1,1 +1,6 @@
-export class CreateImageDto {}
+export class CreateImageDto {
+  name: string;
+  url: string;
+  album: string;
+  userId: string;
+}
