@@ -77,4 +77,18 @@ export class UsersService {
   remove(id: string) {
     return this.userRepository.delete(id);
   }
+
+  async getAlbums(id: string) {
+    const user = await this.userRepository.findOne({
+      where: {
+        id,
+      },
+      relations: ['albums', 'albums.images'],
+    });
+    return user.albums;
+  }
+
+  async getProfileImages() {
+    // TODO: ADD THIS FUNCTIONALITY
+  }
 }

@@ -44,4 +44,9 @@ export class UsersController {
   async remove(@Param('id') id: string) {
     return await this.usersService.remove(id);
   }
+
+  @Get(':id/albums')
+  async getAlbums(@Param('id') id: string) {
+    return await this.usersService.getAlbums(id);
+  }
 }

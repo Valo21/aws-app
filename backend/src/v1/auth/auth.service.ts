@@ -14,7 +14,6 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-
   public async signUp(
     createUserDto: CreateUserDto,
     image: Express.Multer.File,
@@ -58,5 +57,4 @@ export class AuthService {
 
     return this.jwtService.sign(payload);
   }
-
 }
