@@ -12,7 +12,7 @@ function UploadPage() {
   const toast = useRef<Toast>(null);
   const user = useAppSelector(state => state.auth.user);
   const { data: albums } = useGetUserAlbumsQuery(user.id);
-  const [selectedAlbum, setSelectedAlbum] = useState<string>();
+  const [selectedAlbum, setSelectedAlbum] = useState<Pick<Album, 'id' | 'name'>>();
   const [selectedPhoto, setSelectedPhoto] = useState<File>();
 
   if (!albums) {
@@ -21,15 +21,15 @@ function UploadPage() {
     )
   }
 
-  let options = albums.map((album) => ({
+  let options = albums.map((album: Album) => ({
     name: album.name,
-    code: album.name
+    id: album.name
   }));
 
   if (albums.length === 0) {
     options = [{
       name: 'Album 1',
-      code: 'A1',
+      id: 'A1',
     }]
   }
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
@@ -49,7 +49,7 @@ function UploadPage() {
       });
       return;
     }
-    // @ts-ignore
+
     form.set('album', selectedAlbum.name);
     const res = await fetch(
       import.meta.env.VITE_BACKEND_URL.concat('/v1/images'),

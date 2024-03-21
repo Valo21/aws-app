@@ -23,7 +23,7 @@ function Photos() {
         <Fieldset legend="Profile photos">
           <span className='grid grid-cols-1 md:grid-cols-3 gap-3'>
             { profilePhotos ?
-              profilePhotos.map((img) => (
+              profilePhotos.map((img: ProfilePhoto) => (
                 <Image src={img.url} imageClassName='shadow-md border-2 rounded-md' width='100%' height='100%' className='max-w-96' alt='Profile picture'/>
               ))
               :

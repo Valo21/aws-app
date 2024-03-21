@@ -114,6 +114,7 @@ function AuthPage() {
     return;
   }
 
+
   return (
     <main className='max-w-md flex flex-col justify-center items-center relative'>
       <Toast ref={toast} />
@@ -125,6 +126,8 @@ function AuthPage() {
             }}
             initial='hidden'
             animate={!isRegisterVisible ? "visible" : "hidden"}
+            // TODO: FIX THIS
+            // @ts-expect-error it works anyways
             variants={variants}
       >
         <form className='flex flex-col gap-2' onSubmit={handleSignIn}>
@@ -150,6 +153,8 @@ function AuthPage() {
             }}
                   initial='hidden'
                   animate={isRegisterVisible ? "visible" : "hidden"}
+                  // TODO: FIX THIS
+                  // @ts-expect-error it works anyways
                   variants={variants}
       >
         <form className='flex flex-col gap-6' onSubmit={handleSignUp}>

@@ -18,10 +18,6 @@ function Home() {
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [selectedPhoto, setSelectedPhoto] = useState<File>();
 
-  // TODO: Utils
-  function getFileUrl(file) {
-    return URL.createObjectURL(file);
-  }
 
   async function handleSave(e: FormEvent<HTMLFormElement>){
     e.preventDefault();
@@ -93,7 +89,7 @@ function Home() {
       <Card className='flex-1'>
         <div className='flex flex-col gap-6 md:flex-row'>
           <span className='flex flex-1 justify-center'>
-            <Image src={isEditing ? selectedPhoto ? getFileUrl(selectedPhoto) : user.image : user.image} width='400px' height='400px' className='max-w-96' alt='Profile picture'/>
+            <Image src={isEditing ? selectedPhoto ? URL.createObjectURL(selectedPhoto) : user.image : user.image} width='400px' height='400px' className='max-w-96' alt='Profile picture'/>
           </span>
           {
             isEditing ?

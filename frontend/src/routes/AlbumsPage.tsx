@@ -7,11 +7,12 @@ import {useAppSelector} from "../hooks/redux.ts";
 import {useGetUserAlbumsQuery} from "../store/api/photosApi.ts";
 import {ProgressSpinner} from "primereact/progressspinner";
 
+
 function AlbumsPage() {
   const toast = useRef<Toast>(null);
   const user = useAppSelector(state => state.auth.user);
   const [inputName, setInputName] = useState<string>();
-  const [selectedAlbum, setSelectedAlbum] = useState<string>();
+  const [selectedAlbum, setSelectedAlbum] = useState<Pick<Album, "id" | "name">>();
   const { data: albums } = useGetUserAlbumsQuery(user.id);
 
   if (!albums) {
@@ -20,7 +21,7 @@ function AlbumsPage() {
     )
   }
 
-  let options = albums.map((album) => ({
+  const options: Pick<Album, "id" | "name">[] = albums.map((album) => ({
     name: album.name,
     id: album.id
   }));
@@ -65,7 +66,6 @@ function AlbumsPage() {
       return;
     }
 
-    // @ts-ignore
     const res = await fetch(import.meta.env.VITE_BACKEND_URL.concat('/v1/albums/', selectedAlbum.id), {
       method: 'PATCH',
       headers: {
@@ -104,7 +104,6 @@ function AlbumsPage() {
       return;
     }
 
-    // @ts-ignore
     const res = await fetch(import.meta.env.VITE_BACKEND_URL.concat('/v1/albums/', selectedAlbum.id), {
       method: 'DELETE',
       credentials: 'include'
