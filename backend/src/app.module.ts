@@ -9,6 +9,7 @@ import { AlbumsModule } from './v1/albums/albums.module';
 import * as process from 'process';
 import { AuthModule } from './v1/auth/auth.module';
 import { UploaderModule } from './v1/uploader/uploader.module';
+import { ProfilePhotosModule } from './v1/profile-photos/profile-photos.module';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { UploaderModule } from './v1/uploader/uploader.module';
     }),
     AuthModule,
     UploaderModule,
+    ProfilePhotosModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -8,6 +8,8 @@ import { User } from '../users/entities/user.entity';
 import { UploaderService } from '../uploader/uploader.service';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule } from '@nestjs/config';
+import { ProfilePhotosService } from '../profile-photos/profile-photos.service';
+import { ProfilePhoto } from '../profile-photos/entities/profile-photo.entity';
 
 @Module({
   imports: [
@@ -15,7 +17,7 @@ import { ConfigModule } from '@nestjs/config';
       isGlobal: true,
       envFilePath: [`${process.env.NODE_ENV}.env`],
     }),
-    TypeOrmModule.forFeature([User]),
+    TypeOrmModule.forFeature([User, ProfilePhoto]),
     JwtModule.register({
       global: true,
       secret: process.env.JWT_SECRET,
@@ -23,6 +25,12 @@ import { ConfigModule } from '@nestjs/config';
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, JwtStrategy, UsersService, UploaderService],
+  providers: [
+    AuthService,
+    JwtStrategy,
+    UsersService,
+    UploaderService,
+    ProfilePhotosService,
+  ],
 })
 export class AuthModule {}

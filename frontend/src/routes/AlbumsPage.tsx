@@ -11,8 +11,8 @@ function AlbumsPage() {
   const toast = useRef<Toast>(null);
   const user = useAppSelector(state => state.auth.user);
   const [inputName, setInputName] = useState<string>();
-  const { data: albums } = useGetUserAlbumsQuery(user.id);
   const [selectedAlbum, setSelectedAlbum] = useState<string>();
+  const { data: albums } = useGetUserAlbumsQuery(user.id);
 
   if (!albums) {
     return (

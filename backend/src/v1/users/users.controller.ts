@@ -49,4 +49,9 @@ export class UsersController {
   async getAlbums(@Param('id') id: string) {
     return await this.usersService.getAlbums(id);
   }
+
+  @Get(':id/profile-photos')
+  async getProfilePhotos(@Param('id') id: string) {
+    return await this.usersService.getProfilePhotos(id);
+  }
 }

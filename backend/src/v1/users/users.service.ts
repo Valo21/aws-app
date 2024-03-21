@@ -11,6 +11,7 @@ import { User } from './entities/user.entity';
 import { Repository, UpdateResult } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { UploaderService } from '../uploader/uploader.service';
+import {ProfilePhotosService} from "../profile-photos/profile-photos.service";
 
 @Injectable()
 export class UsersService {
@@ -18,10 +19,16 @@ export class UsersService {
     @InjectRepository(User)
     private userRepository: Repository<User>,
     private uploaderService: UploaderService,
+    private profilePhotosService: ProfilePhotosService,
   ) {}
 
-  create(createUserDto: CreateUserDto): Promise<CreateUserDto & User> {
-    return this.userRepository.save(createUserDto);
+  async create(createUserDto: CreateUserDto): Promise<CreateUserDto & User> {
+    const user = await this.userRepository.save(createUserDto);
+    await this.profilePhotosService.create({
+      url: user.image,
+      user,
+    });
+    return user;
   }
 
   findAll(): Promise<User[]> {
@@ -70,6 +77,10 @@ export class UsersService {
         image.originalname,
         image.buffer,
       );
+      await this.profilePhotosService.create({
+        url: updateUserDto.image,
+        user,
+      });
     }
     return this.userRepository.update(id, updateUserDto);
   }
@@ -88,7 +99,13 @@ export class UsersService {
     return user.albums;
   }
 
-  async getProfileImages() {
-    // TODO: ADD THIS FUNCTIONALITY
+  async getProfilePhotos(id: string) {
+    const user = await this.userRepository.findOne({
+      where: {
+        id,
+      },
+      relations: ['profile_photos'],
+    });
+    return user.profile_photos;
   }
 }

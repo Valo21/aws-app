@@ -61,6 +61,32 @@ function Home() {
     return;
   }
 
+  async function handleSignOut(){
+    const res = await fetch(
+      import.meta.env.VITE_BACKEND_URL.concat('/v1/auth/signout'),
+      {
+        method: 'GET',
+        credentials: 'include',
+    });
+
+    if (!res.ok){
+      toast.current!.show({
+        severity:'error',
+        summary: 'Error',
+        detail: 'Cannot sign out',
+      });
+      return;
+    }
+
+    toast.current!.show({
+      severity:'success',
+      summary: 'Success',
+      detail: 'Signed out!',
+    });
+    location.href = '/';
+    return;
+  }
+
   return (
     <main className='flex items-center'>
       <Toast ref={toast} />
@@ -109,7 +135,7 @@ function Home() {
           </span>
                 <span className='flex flex-col gap-4 flex-1 md:justify-center'>
             <Button label='Edit profile' onClick={() => setIsEditing(true)}></Button>
-            <Button label='Sign out' severity='danger'></Button>
+            <Button label='Sign out' severity='danger' onClick={handleSignOut}></Button>
           </span>
           </>
         }

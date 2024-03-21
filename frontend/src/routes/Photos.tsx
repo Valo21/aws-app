@@ -4,12 +4,13 @@ import {NavigateFunction, useNavigate} from "react-router-dom";
 import {Fieldset} from "primereact/fieldset";
 import {Image} from "primereact/image";
 import {useAppSelector} from "../hooks/redux.ts";
-import {useGetUserAlbumsQuery} from "../store/api/photosApi.ts";
+import {useGetUserAlbumsQuery, useGetUserProfilePhotosQuery} from "../store/api/photosApi.ts";
 
 function Photos() {
   const navigate: NavigateFunction = useNavigate();
   const user = useAppSelector((state) => state.auth.user)
-  const { data } = useGetUserAlbumsQuery(user.id);
+  const { data: albums } = useGetUserAlbumsQuery(user.id);
+  const { data: profilePhotos } = useGetUserProfilePhotosQuery(user.id);
 
   return (
     <main className='flex flex-col md:flex-row gap-6'>
@@ -21,13 +22,17 @@ function Photos() {
       <span className='flex-1 flex flex-col gap-4'>
         <Fieldset legend="Profile photos">
           <span className='grid grid-cols-1 md:grid-cols-3 gap-3'>
-            {
+            { profilePhotos ?
+              profilePhotos.map((img) => (
+                <Image src={img.url} width='100%' height='100%' className='max-w-96' alt='Profile picture'/>
+              ))
+              :
               Array.from({length: 4}, () => <Skeleton width="100%" height="18rem" borderRadius="10px"/>)
             }
           </span>
         </Fieldset>
-        { data ?
-          data.map((album) => (
+        { albums ?
+          albums.map((album) => (
             <Fieldset legend={album.name}>
               <span className='grid grid-cols-1 md:grid-cols-3 gap-3'>
                 {

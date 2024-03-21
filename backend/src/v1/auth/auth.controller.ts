@@ -52,4 +52,15 @@ export class AuthController {
     });
     return 200;
   }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('signout')
+  public signOut(
+    @Res({ passthrough: true }) res: Response
+  ) {
+    res.clearCookie('accessToken', {
+      httpOnly: true,
+    })
+    return 200;
+  }
 }

@@ -5,6 +5,7 @@ import { User } from '../users/entities/user.entity';
 import { UploaderService } from '../uploader/uploader.service';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
+import {ProfilePhotosService} from "../profile-photos/profile-photos.service";
 
 @Injectable()
 export class AuthService {

@@ -8,9 +8,12 @@ export const photosApi = createApi({
     getUserAlbums: builder.query<any, string>({
       query: (id) => `/users/${id}/albums`,
     }),
+    getUserProfilePhotos: builder.query<any, string>({
+      query: (id: string) => `/users/${id}/profile-photos`,
+    }),
   }),
 })
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetUserAlbumsQuery } = photosApi
+export const { useGetUserAlbumsQuery, useGetUserProfilePhotosQuery } = photosApi
