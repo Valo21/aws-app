@@ -22,10 +22,6 @@ export class ProfilePhotosService {
     return `This action returns a #${id} profilePhoto`;
   }
 
-  update(id: number) {
-    return `This action updates a #${id} profilePhoto`;
-  }
-
   remove(id: number) {
     return `This action removes a #${id} profilePhoto`;
   }
