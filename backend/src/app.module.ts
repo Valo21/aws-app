@@ -17,8 +17,8 @@ import { UploaderModule } from './v1/uploader/uploader.module';
       envFilePath: [`${process.env.NODE_ENV}.env`],
     }),
     UsersModule,
-    ImagesModule,
     AlbumsModule,
+    ImagesModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DATABASE_HOST,

@@ -6,10 +6,13 @@ import { Album } from './entities/album.entity';
 import { User } from '../users/entities/user.entity';
 import { UsersService } from '../users/users.service';
 import { UploaderService } from '../uploader/uploader.service';
+import {ImagesService} from "../images/images.service";
+import { Image } from "../images/entities/image.entity";
+import {ImagesModule} from "../images/images.module";
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Album, User])],
+  imports: [ImagesModule, TypeOrmModule.forFeature([Image, Album, User])],
   controllers: [AlbumsController],
-  providers: [AlbumsService, UsersService, UploaderService],
+  providers: [AlbumsService, UsersService, ImagesService, UploaderService],
 })
 export class AlbumsModule {}
