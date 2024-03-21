@@ -1,9 +1,18 @@
-import {Controller, Get, Body, Patch, Param, Delete, Post, UseGuards, Req} from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Post,
+  UseGuards,
+  Req,
+} from '@nestjs/common';
 import { AlbumsService } from './albums.service';
 import { UpdateAlbumDto } from './dto/update-album.dto';
-import {JwtAuthGuard} from "../auth/jwt-auth.guard";
-import {Request} from 'express';
-import {CreateAlbumDto} from "./dto/create-album.dto";
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { CreateAlbumDto } from './dto/create-album.dto';
 
 @Controller('v1/albums')
 export class AlbumsController {
@@ -16,8 +25,7 @@ export class AlbumsController {
 
   @UseGuards(JwtAuthGuard)
   @Post()
-  create(@Req() req: Request, @Body() createAlbumDto: CreateAlbumDto) {
-    // @ts-ignore
+  create(@Req() req: Express.Request, @Body() createAlbumDto: CreateAlbumDto) {
     return this.albumsService.create(createAlbumDto.name, req.user.id);
   }
 

@@ -1,5 +1,10 @@
-import { forwardRef, HttpException, HttpStatus, Inject, Injectable} from '@nestjs/common';
-import { CreateAlbumDto } from './dto/create-album.dto';
+import {
+  forwardRef,
+  HttpException,
+  HttpStatus,
+  Inject,
+  Injectable,
+} from '@nestjs/common';
 import { UpdateAlbumDto } from './dto/update-album.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Album } from './entities/album.entity';

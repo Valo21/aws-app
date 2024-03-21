@@ -5,8 +5,8 @@ import { User } from './entities/user.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { JwtStrategy } from '../auth/jwt.strategy';
 import { UploaderService } from '../uploader/uploader.service';
-import {ProfilePhotosService} from "../profile-photos/profile-photos.service";
-import {ProfilePhoto} from "../profile-photos/entities/profile-photo.entity";
+import { ProfilePhotosService } from '../profile-photos/profile-photos.service';
+import { ProfilePhoto } from '../profile-photos/entities/profile-photo.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User, ProfilePhoto])],

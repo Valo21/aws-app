@@ -27,8 +27,6 @@ export class ImagesController {
     @UploadedFile() image: Express.Multer.File,
     @Req() req: Express.Request,
   ) {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
     return await this.imagesService.create(createImageDto, image, req.user.id);
   }
 

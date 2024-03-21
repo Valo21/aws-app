@@ -1,19 +1,19 @@
 interface User {
   id: string;
   username: string;
-  fullname: string;
+  fullName: string;
+  image: string;
   createdAt: Date;
   updatedAt: Date;
 }
 
 interface ProfilePhoto {
-  id:string;
+  id: string;
   name: string;
   url: string;
   createdAt: Date;
   updatedAt: Date;
 }
-
 
 interface Image extends ProfilePhoto {
   name: string;

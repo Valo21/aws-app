@@ -11,7 +11,7 @@ import { User } from './entities/user.entity';
 import { Repository, UpdateResult } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { UploaderService } from '../uploader/uploader.service';
-import {ProfilePhotosService} from "../profile-photos/profile-photos.service";
+import { ProfilePhotosService } from '../profile-photos/profile-photos.service';
 
 @Injectable()
 export class UsersService {

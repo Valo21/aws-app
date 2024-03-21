@@ -7,7 +7,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { Album } from '../../albums/entities/album.entity';
-import {ProfilePhoto} from "../../profile-photos/entities/profile-photo.entity";
+import { ProfilePhoto } from '../../profile-photos/entities/profile-photo.entity';
 
 @Entity('users')
 export class User {

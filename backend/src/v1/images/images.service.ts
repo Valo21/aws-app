@@ -32,10 +32,7 @@ export class ImagesService {
     );
 
     if (!album) {
-      album = await this.albumsService.create(
-        createImageDto.album,
-        userId,
-      );
+      album = await this.albumsService.create(createImageDto.album, userId);
     }
 
     const imageEntity: Image = await this.imagesRepository.save({

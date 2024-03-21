@@ -1,8 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CreateProfilePhotoDto } from './dto/create-profile-photo.dto';
-import { UpdateProfilePhotoDto } from './dto/update-profile-photo.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from '../users/entities/user.entity';
 import { Repository } from 'typeorm';
 import { ProfilePhoto } from './entities/profile-photo.entity';
 
@@ -24,7 +22,7 @@ export class ProfilePhotosService {
     return `This action returns a #${id} profilePhoto`;
   }
 
-  update(id: number, updateProfilePhotoDto: UpdateProfilePhotoDto) {
+  update(id: number) {
     return `This action updates a #${id} profilePhoto`;
   }
 
