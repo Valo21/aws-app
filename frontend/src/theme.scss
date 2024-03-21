@@ -1,0 +1,86 @@
+:root {
+  --primary-color: 255, 132, 39 !important; /* RGB values for #FF8427 */
+  --secondary-color: 13, 27, 30; /* RGB values for #0d1b1e */
+  --terciary-color: 48, 102, 190; /* RGB values for #3066be */
+  --danger-color: 146, 20, 12; /* RGB values for #92140c */
+  --success-color: 17, 157, 164; /* RGB values for #119DA4 */
+  --white-color: 252, 252, 252; /* RGB values for #fcfcfc */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.p-card, .p-fieldset {
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+  @apply rounded-xl;
+}
+
+.p-button {
+  --color: var(--primary-color);
+  @apply rounded-full;
+  width: 100%;
+  text-align: center;
+  background-color: rgb(var(--color));
+  border-color: rgb(var(--color));
+  transition: transform;
+  transition-duration: 300ms;
+
+  &:focus {
+    box-shadow: rgba(var(--color), 0.3) 0px 4px 4px, rgba(var(--color), 0.3) 0px 8px 32px;
+    transform: scale(0.98);
+  }
+}
+
+.p-button-secondary {
+  --color: var(--secondary-color);
+}
+
+.p-button-danger {
+  --color: var(--danger-color);
+}
+.p-inputtext {
+  --color: var(--primary-color);
+  &:focus {
+    box-shadow: rgba(var(--color), 0.1) 0px 4px 4px, rgba(var(--color), 0.1) 0px 8px 32px;
+  }
+  &:hover, &:focus {
+    border-color: rgba(var(--color));
+  }
+}
+
+input {
+  width: 100%;
+}
+
+
+.p-toast-message-error {
+  border-color: rgb(var(--danger-color));
+  color: rgb(var(--danger-color));
+  svg {
+    color: rgb(var(--danger-color));
+  }
+}
+
+.p-toast-message-success {
+  border-color: rgb(var(--success-color));
+  color: rgb(var(--success-color));
+  svg {
+    color: rgb(var(--success-color));
+  }
+}
+
+.p-fieldset-legend {
+  background-color: rgba(var(--primary-color));
+  color: rgba(var(--white-color), 0.8);
+}
+.p-dropdown {
+  &:not(.p-disabled).p-focus {
+    box-shadow: rgba(var(--primary-color), 0.1) 0px 4px 4px, rgba(var(--primary-color), 0.1) 0px 8px 32px;
+    border-color: rgb(var(--primary-color));
+  }
+  &:hover {
+    border-color: rgb(var(--primary-color));
+  }
+}

@@ -12,6 +12,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.1",
     "axios": "^1.6.8",
+    "framer-motion": "^11.0.20",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.4",
     "primereact": "^10.5.3",

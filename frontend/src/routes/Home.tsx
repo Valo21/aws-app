@@ -92,13 +92,13 @@ function Home() {
       <Toast ref={toast} />
       <Card className='flex-1'>
         <div className='flex flex-col gap-6 md:flex-row'>
-          <span className='flex flex-col gap-6 flex-1'>
-            <Image src={isEditing ? selectedPhoto ? getFileUrl(selectedPhoto) : user.image : user.image} width='100%' height='100%' className='max-w-96' alt='Profile picture'/>
+          <span className='flex flex-1 justify-center'>
+            <Image src={isEditing ? selectedPhoto ? getFileUrl(selectedPhoto) : user.image : user.image} width='400px' height='400px' className='max-w-96' alt='Profile picture'/>
           </span>
           {
             isEditing ?
               <form onSubmit={handleSave} className='flex flex-col gap-4 flex-1'>
-                <span className='self-center'>
+                <span className='self-center flex'>
                   <FileUpload mode="basic" name="demo[]" url="/api/upload" accept="image/*" customUpload
                               chooseLabel='New photo' onSelect={(e) => setSelectedPhoto(e.files[0])}/>
                 </span>

@@ -127,16 +127,18 @@ function AlbumsPage() {
   }
 
   return (
-    <main>
+    <main className='flex justify-center items-center'>
       <Toast ref={toast} />
-      <form onSubmit={handleCreate}>
+      <form onSubmit={handleCreate} className='flex flex-col gap-6'>
         <div className="flex flex-col gap-2">
           <label htmlFor="name">Album name</label>
-          <InputText value={inputName} onChange={(e) => setInputName(e.currentTarget.value)} id="name" name='name' aria-describedby="username-help" required/>
+          <InputText value={inputName} onChange={(e) => setInputName(e.currentTarget.value)} id="name" name='name' aria-describedby="username-help" required autoComplete='off'/>
         </div>
-        <Button label='Add' type='submit'/>
-        <Button label='Change' type='button' onClick={handleUpdate}/>
-        <Button label='Delete album' type='button' onClick={handleDelete}/>
+        <span className='flex flex-col gap-2 md:flex-row md:min-w-[500px]'>
+          <Button label='Add' type='submit'/>
+          <Button label='Change' type='button' onClick={handleUpdate}/>
+          <Button label='Delete album' type='button' severity='danger' onClick={handleDelete}/>
+        </span>
         <Dropdown value={selectedAlbum} onChange={(e) => setSelectedAlbum(e.value)} options={options} optionLabel="name" placeholder="Select an album" className="w-full" name='album'/>
       </form>
     </main>

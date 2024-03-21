@@ -3,9 +3,10 @@ import * as ReactDOM from "react-dom/client";
 import {
   RouterProvider,
 } from "react-router-dom";
-import "./index.scss";
 import {router} from "./routes.tsx";
-import "primereact/resources/themes/bootstrap4-light-blue/theme.css";
+import './theme.scss';
+import "primereact/resources/themes/lara-light-blue/theme.css";
+import "./index.scss";
 import {PrimeReactProvider} from "primereact/api";
 import {DesignTheme} from "./design.theme.ts";
 import {Provider} from "react-redux";

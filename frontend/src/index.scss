@@ -18,12 +18,8 @@ body {
   padding: 1em 1em 0;
 }
 
-main, .p-button, #root, input {
+main, #root {
   @apply w-full
-}
-
-.p-button {
-  @apply rounded-full no-underline text-center
 }
 
 #root {
@@ -33,7 +29,26 @@ main, .p-button, #root, input {
   transition-duration: 300ms;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  margin-top: 0;
-  margin-bottom: 0;
+
+@keyframes fade-in {
+  0% {
+    transform: translateX(200px);
+    opacity: 0;
+    display: none;
+  }
+  100% {
+    transform: translateX(0px);
+    opacity: 1;
+    display: block;
+  }
 }
+
+.animation-fade-in {
+  animation: fade-in 1s ease forwards;
+}
+
+.animation-fade-out {
+  animation: fade-in 1s ease backwards reverse;
+  animation-fill-mode: forwards;
+}
+

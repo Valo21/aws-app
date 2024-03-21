@@ -13,8 +13,8 @@ function Photos() {
   const { data: profilePhotos } = useGetUserProfilePhotosQuery(user.id);
 
   return (
-    <main className='flex flex-col md:flex-row gap-6'>
-      <span className='flex flex-col gap-6 min-w-72'>
+    <main className='flex flex-col xl:flex-row gap-6'>
+      <span className='flex flex-col gap-6 min-w-72 items-center'>
         <Image src={user.image} width='100%' height='100%' className='max-w-96' alt='Profile picture'/>
         <Button label='Upload photo' severity="secondary" onClick={()=> navigate('/upload')} ></Button>
         <Button label='Edit albums' severity="secondary" onClick={()=> navigate('/albums')}></Button>
@@ -24,10 +24,10 @@ function Photos() {
           <span className='grid grid-cols-1 md:grid-cols-3 gap-3'>
             { profilePhotos ?
               profilePhotos.map((img) => (
-                <Image src={img.url} width='100%' height='100%' className='max-w-96' alt='Profile picture'/>
+                <Image src={img.url} imageClassName='shadow-md border-2 rounded-md' width='100%' height='100%' className='max-w-96' alt='Profile picture'/>
               ))
               :
-              Array.from({length: 4}, () => <Skeleton width="100%" height="18rem" borderRadius="10px"/>)
+              Array.from({length: 3}, () => <Skeleton width="100%" height="18rem" borderRadius="10px"/>)
             }
           </span>
         </Fieldset>
@@ -50,7 +50,7 @@ function Photos() {
             }>
               <span className='grid grid-cols-1 md:grid-cols-3 gap-3'>
                 {
-                  Array.from({length: 4}, () =>
+                  Array.from({length: 3}, () =>
                     <Skeleton width="100%" height="15rem" borderRadius="10px"/>
                   )
                 }
