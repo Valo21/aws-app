@@ -8,6 +8,8 @@ import {router} from "./routes.tsx";
 import "primereact/resources/themes/bootstrap4-light-blue/theme.css";
 import {PrimeReactProvider} from "primereact/api";
 import {DesignTheme} from "./design.theme.ts";
+import {Provider} from "react-redux";
+import {store} from "./store";
 
 
 const root: HTMLElement | null = document.getElementById("root");
@@ -16,7 +18,9 @@ if (root) {
   ReactDOM.createRoot(root).render(
     <React.StrictMode>
       <PrimeReactProvider value={{pt: DesignTheme}}>
-        <RouterProvider router={router} />
+        <Provider store={store}>
+          <RouterProvider router={router} />
+        </Provider>
       </PrimeReactProvider>
     </React.StrictMode>
   );

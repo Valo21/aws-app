@@ -33,6 +33,12 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     if (!user) {
       return null;
     }
-    return payload;
+
+    return {
+      id: user.id,
+      username: user.username,
+      fullName: user.fullName,
+      image: user.image,
+    };
   }
 }

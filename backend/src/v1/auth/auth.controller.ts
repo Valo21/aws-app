@@ -50,6 +50,6 @@ export class AuthController {
       sameSite: 'lax',
       expires: new Date(Date.now() + 7 * 24 * 60 * 1000),
     });
-    return;
+    return 200;
   }
 }
