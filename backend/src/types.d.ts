@@ -6,5 +6,8 @@ declare namespace Express {
       fullName: string;
       image: string;
     };
+    session: {
+      accessToken: string | null;
+    }
   }
 }

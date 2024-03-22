@@ -5,6 +5,9 @@ export const photosApi = createApi({
   reducerPath: 'photosApi',
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_BACKEND_URL.concat('/v1'),
+    headers: {
+      'Authorization': 'Bearer ' + sessionStorage.getItem('accessToken') ?? ''
+    }
   }),
   endpoints: (builder) => ({
     getUserAlbums: builder.query<Album[], string>({

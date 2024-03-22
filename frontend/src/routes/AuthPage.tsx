@@ -38,12 +38,12 @@ function AuthPage() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + sessionStorage.getItem('accessToken') ?? ''
         },
         body: JSON.stringify({
           username: form.get('username'),
           password: form.get('password'),
         }),
-        credentials: 'include',
       },
     );
     const body = await res.json();
@@ -55,6 +55,9 @@ function AuthPage() {
       });
       return;
     }
+
+    sessionStorage.setItem('accessToken', body.accessToken);
+
     toast.current!.show({
       severity: 'success',
       summary: 'Success',

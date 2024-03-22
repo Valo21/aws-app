@@ -35,7 +35,9 @@ function Home() {
       {
         method: 'PATCH',
         body: form,
-        credentials: 'include',
+        headers: {
+          'Authorization': 'Bearer ' + sessionStorage.getItem('accessToken') ?? ''
+        },
       },
     );
     const body = await res.json();
@@ -57,11 +59,14 @@ function Home() {
   }
 
   async function handleSignOut() {
+    /*
     const res = await fetch(
       import.meta.env.VITE_BACKEND_URL.concat('/v1/auth/signout'),
       {
         method: 'GET',
-        credentials: 'include',
+        headers: {
+          'Authorization': 'Bearer ' + sessionStorage.getItem('accessToken') ?? ''
+        }
       },
     );
 
@@ -73,6 +78,8 @@ function Home() {
       });
       return;
     }
+     */
+    sessionStorage.removeItem('accessToken');
 
     toast.current!.show({
       severity: 'success',

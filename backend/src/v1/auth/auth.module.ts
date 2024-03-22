@@ -20,7 +20,7 @@ import { ProfilePhoto } from '../profile-photos/entities/profile-photo.entity';
     TypeOrmModule.forFeature([User, ProfilePhoto]),
     JwtModule.register({
       global: true,
-      secret: process.env.JWT_SECRET,
+      secret: 'Mysecret',
       signOptions: { expiresIn: '7d' },
     }),
   ],
