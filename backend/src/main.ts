@@ -8,7 +8,6 @@ async function bootstrap() {
   app.use(cookieParser());
   app.enableCors({
     origin: [
-      'http://localhost:5173',
       'http://aws-app-bucker.s3-website.us-east-2.amazonaws.com',
     ],
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
