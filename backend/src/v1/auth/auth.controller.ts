@@ -45,6 +45,7 @@ export class AuthController {
       signInDto.username,
       signInDto.password,
     );
+    console.log(req)
     res.cookie('accessToken', accessToken, {
       httpOnly: true,
       secure: true,
