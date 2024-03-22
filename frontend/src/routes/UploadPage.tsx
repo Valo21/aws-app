@@ -57,7 +57,9 @@ function UploadPage() {
       {
         method: 'POST',
         body: form,
-        credentials: 'include',
+        headers: {
+          'Authorization': 'Bearer ' + sessionStorage.getItem('accessToken') ?? ''
+        }
       },
     );
     const body = await res.json();

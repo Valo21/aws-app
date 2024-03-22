@@ -5,7 +5,9 @@ import { setUser } from '../store/slices/authSlice.ts';
 export async function AuthLoader() {
   const res = await fetch(import.meta.env.VITE_BACKEND_URL.concat('/v1/auth'), {
     method: 'GET',
-    credentials: 'include',
+    headers: {
+      'Authorization': 'Bearer ' + sessionStorage.getItem('accessToken') ?? ''
+    }
   });
   if (res.status !== 200) {
     return redirect('/auth');

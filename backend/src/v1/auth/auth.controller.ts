@@ -30,11 +30,13 @@ export class AuthController {
     @Body() signInDto: SignInDto,
     @Req() req: Request,
   ) {
-    req.session.accessToken = await this.authService.signIn(
+    const accessToken = await this.authService.signIn(
       signInDto.username,
       signInDto.password,
     );
-    return 200;
+    return {
+      accessToken
+    }
   }
 
   @UseGuards(JwtAuthGuard)

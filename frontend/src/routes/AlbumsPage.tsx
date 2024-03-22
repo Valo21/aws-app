@@ -33,11 +33,11 @@ function AlbumsPage() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + sessionStorage.getItem('accessToken') ?? ''
         },
         body: JSON.stringify({
           name: form.get('name'),
         }),
-        credentials: 'include',
       },
     );
     const body = await res.json();
@@ -73,11 +73,11 @@ function AlbumsPage() {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + sessionStorage.getItem('accessToken') ?? ''
         },
         body: JSON.stringify({
           name: inputName,
         }),
-        credentials: 'include',
       },
     );
 
@@ -112,7 +112,9 @@ function AlbumsPage() {
       import.meta.env.VITE_BACKEND_URL.concat('/v1/albums/', selectedAlbum.id),
       {
         method: 'DELETE',
-        credentials: 'include',
+        headers: {
+          'Authorization': 'Bearer ' + sessionStorage.getItem('accessToken') ?? ''
+        },
       },
     );
     const body = await res.json();
