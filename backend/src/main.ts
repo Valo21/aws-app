@@ -6,10 +6,10 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix('/api/');
   app.use(cookieParser());
+
+  // TODO: Change this
   app.enableCors({
-    origin: [
-      'http://aws-app-bucker.s3-website.us-east-2.amazonaws.com',
-    ],
+    origin: true,
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
     credentials: true,
   });
