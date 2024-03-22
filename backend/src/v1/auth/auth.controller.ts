@@ -48,7 +48,7 @@ export class AuthController {
       httpOnly: true,
       secure: true,
       sameSite: 'none',
-      expires: new Date(Date.now() + 7 * 24 * 60 * 1000),
+      expires: new Date(Date.now() * 7 * 24 * 60 * 1000),
     });
     return 200;
   }
