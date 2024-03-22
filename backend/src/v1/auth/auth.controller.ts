@@ -38,6 +38,7 @@ export class AuthController {
   @Post('signin')
   public async signIn(
     @Body() signInDto: SignInDto,
+    @Req() req: Request,
     @Res({ passthrough: true }) res: Response,
   ) {
     const accessToken: string = await this.authService.signIn(
@@ -47,7 +48,7 @@ export class AuthController {
     res.cookie('accessToken', accessToken, {
       httpOnly: true,
       secure: true,
-      sameSite: 'none',
+      domain: req.hostname,
       expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
     });
     return 200;
