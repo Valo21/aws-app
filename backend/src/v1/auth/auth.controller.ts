@@ -1,20 +1,10 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  UseInterceptors,
-  UploadedFile,
-  Res,
-  UseGuards,
-  Req,
-} from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { CreateUserDto } from '../users/dto/create-user.dto';
-import { FileInterceptor } from '@nestjs/platform-express';
-import { SignInDto } from './dto/sign-in.dto';
-import { Response, Request } from 'express';
-import { JwtAuthGuard } from './jwt-auth.guard';
+import {Body, Controller, Get, Post, Req, Res, UploadedFile, UseGuards, UseInterceptors,} from '@nestjs/common';
+import {AuthService} from './auth.service';
+import {CreateUserDto} from '../users/dto/create-user.dto';
+import {FileInterceptor} from '@nestjs/platform-express';
+import {SignInDto} from './dto/sign-in.dto';
+import {Request, Response} from 'express';
+import {JwtAuthGuard} from './jwt-auth.guard';
 
 @Controller('v1/auth')
 export class AuthController {
@@ -39,27 +29,18 @@ export class AuthController {
   public async signIn(
     @Body() signInDto: SignInDto,
     @Req() req: Request,
-    @Res({ passthrough: true }) res: Response,
   ) {
-    const accessToken: string = await this.authService.signIn(
+    req.session.accessToken = await this.authService.signIn(
       signInDto.username,
       signInDto.password,
     );
-    res.cookie('accessToken', accessToken, {
-      httpOnly: true,
-      secure: true,
-      domain: req.headers.origin,
-      expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-    });
     return 200;
   }
 
   @UseGuards(JwtAuthGuard)
   @Get('signout')
-  public signOut(@Res({ passthrough: true }) res: Response) {
-    res.clearCookie('accessToken', {
-      httpOnly: true,
-    });
+  public signOut(@Req() req: Express.Request) {
+    req.session.accessToken = null;
     return 200;
   }
 }

@@ -27,9 +27,7 @@ import { ProfilePhotosModule } from './v1/profile-photos/profile-photos.module';
       database: process.env.DATABASE_NAME,
       username: process.env.DATABASE_USERNAME,
       password: process.env.DATABASE_PASSWORD,
-      ssl: {
-        rejectUnauthorized: false
-      },
+      ssl: false,
       synchronize: true,
       logging: 'all',
       autoLoadEntities: true,
