@@ -45,11 +45,10 @@ export class AuthController {
       signInDto.username,
       signInDto.password,
     );
-    console.log(req)
     res.cookie('accessToken', accessToken, {
       httpOnly: true,
       secure: true,
-      domain: req.hostname,
+      domain: req.headers.origin,
       expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
     });
     return 200;
