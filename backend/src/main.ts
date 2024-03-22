@@ -7,7 +7,10 @@ async function bootstrap() {
   app.setGlobalPrefix('/api/');
   app.use(cookieParser());
   app.enableCors({
-    origin: ['http://localhost:5173'],
+    origin: [
+      'http://localhost:5173',
+      'http://aws-app-bucker.s3-website.us-east-2.amazonaws.com',
+    ],
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
     credentials: true,
   });
