@@ -23,9 +23,9 @@ jobs:
 
     - name: Build app
       run: |
-        npm run build
         export VITE_BACKEND_URL="${{ secrets.VITE_BACKEND_URL }}"
         echo "VITE_BACKEND_URL is set to: $VITE_BACKEND_URL"
+        npm run build
       working-directory: ./frontend
 
     - name: Configure AWS Credentials
