@@ -62,6 +62,7 @@ function Photos() {
                   {album.images.map((img) => (
                     <Image
                       src={img.url}
+                      imageClassName="shadow-md border-2 rounded-md"
                       width="100%"
                       height="100%"
                       className="max-w-96"

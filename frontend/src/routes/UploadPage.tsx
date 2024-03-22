@@ -3,7 +3,7 @@ import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { Dropdown } from 'primereact/dropdown';
 import { FormEvent, useRef, useState } from 'react';
-import { useGetUserAlbumsQuery } from '../store/api/photosApi.ts';
+import {useGetUserAlbumsQuery, useUploadAlbumPhotoMutation} from '../store/api/photosApi.ts';
 import { useAppSelector } from '../hooks/redux.ts';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import { Toast } from 'primereact/toast';
@@ -15,6 +15,7 @@ function UploadPage() {
   const [selectedAlbum, setSelectedAlbum] =
     useState<Pick<Album, 'id' | 'name'>>();
   const [selectedPhoto, setSelectedPhoto] = useState<File>();
+  const [uploadPhoto] = useUploadAlbumPhotoMutation();
 
   if (!albums) {
     return <ProgressSpinner></ProgressSpinner>;
@@ -50,24 +51,15 @@ function UploadPage() {
       });
       return;
     }
-
     form.set('album', selectedAlbum.name);
-    const res = await fetch(
-      import.meta.env.VITE_BACKEND_URL.concat('/v1/images'),
-      {
-        method: 'POST',
-        body: form,
-        headers: {
-          'Authorization': 'Bearer ' + sessionStorage.getItem('accessToken') ?? ''
-        }
-      },
-    );
-    const body = await res.json();
-    if (!res.ok) {
+
+    const res = await uploadPhoto(form);
+
+    if ('error' in res && 'message' in res.error) {
       toast.current!.show({
         severity: 'error',
         summary: 'Error',
-        detail: body.message,
+        detail: res.error.message,
       });
       return;
     }

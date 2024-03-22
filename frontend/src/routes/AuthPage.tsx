@@ -3,10 +3,11 @@ import { Card } from 'primereact/card';
 import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
 import { FileUpload } from 'primereact/fileupload';
-import { FormEvent, useRef, useState } from 'react';
-import { Toast } from 'primereact/toast';
+import {FormEvent, useRef, useState} from 'react';
 import { motion } from 'framer-motion';
 import { Image } from 'primereact/image';
+import {Toast} from "primereact/toast";
+import {fetchServer} from "../lib/utils.ts";
 
 const MotionCard = motion(Card);
 
@@ -32,8 +33,11 @@ function AuthPage() {
 
     const form: FormData = new FormData(e.currentTarget);
 
-    const res = await fetch(
-      import.meta.env.VITE_BACKEND_URL.concat('/v1/auth/signin'),
+    await fetchServer<{
+      accessToken: string;
+    }>(
+      toast.current!,
+      '/v1/auth/signin',
       {
         method: 'POST',
         headers: {
@@ -45,25 +49,12 @@ function AuthPage() {
           password: form.get('password'),
         }),
       },
+      (body, display) => {
+        display('Signed in!');
+        sessionStorage.setItem('accessToken', body.accessToken);
+        location.href = '/';
+      }
     );
-    const body = await res.json();
-    if (!res.ok) {
-      toast.current!.show({
-        severity: 'error',
-        summary: 'Error',
-        detail: body.message,
-      });
-      return;
-    }
-
-    sessionStorage.setItem('accessToken', body.accessToken);
-
-    toast.current!.show({
-      severity: 'success',
-      summary: 'Success',
-      detail: 'Signed in!',
-    });
-    location.href = '/';
     return;
   }
 
@@ -94,34 +85,20 @@ function AuthPage() {
     });
     form.append('image', blob, selectedPhoto!.name);
 
-    const res = await fetch(
-      import.meta.env.VITE_BACKEND_URL.concat('/v1/auth/signup'),
+    await fetchServer(
+      toast.current!,
+      '/v1/auth/signup',
       {
         method: 'POST',
         body: form,
       },
+      'Signed up!',
     );
-    const body = await res.json();
-    if (!res.ok) {
-      toast.current!.show({
-        severity: 'error',
-        summary: 'Error',
-        detail: body.message,
-      });
-      return;
-    }
-
-    toast.current!.show({
-      severity: 'success',
-      summary: 'Success',
-      detail: 'Signed up!',
-    });
-    return;
   }
 
   return (
     <main className="max-w-md flex flex-col justify-center items-center relative">
-      <Toast ref={toast} />
+      <Toast ref={toast}/>
       <MotionCard
         title="Sign in"
         className="absolute w-full"
