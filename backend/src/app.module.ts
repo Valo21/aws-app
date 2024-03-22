@@ -15,7 +15,7 @@ import { ProfilePhotosModule } from './v1/profile-photos/profile-photos.module';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: [`${process.env.NODE_ENV}.env`],
+      envFilePath: [`.env`],
     }),
     UsersModule,
     AlbumsModule,
