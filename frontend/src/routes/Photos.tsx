@@ -29,12 +29,12 @@ function Photos() {
           label="Upload photo"
           severity="secondary"
           onClick={() => navigate('/upload')}
-        ></Button>
+        />
         <Button
           label="Edit albums"
           severity="secondary"
           onClick={() => navigate('/albums')}
-        ></Button>
+        />
       </span>
       <span className="flex-1 flex flex-col gap-4">
         <Fieldset legend="Profile photos">
@@ -42,6 +42,7 @@ function Photos() {
             {profilePhotos
               ? profilePhotos.map((img: ProfilePhoto) => (
                   <Image
+                    key={img.id}
                     src={img.url}
                     imageClassName="shadow-md border-2 rounded-md"
                     width="100%"
@@ -50,17 +51,18 @@ function Photos() {
                     alt="Profile picture"
                   />
                 ))
-              : Array.from({ length: 3 }, () => (
-                  <Skeleton width="100%" height="18rem" borderRadius="10px" />
+              : Array.from({ length: 3 }, (_, i) => (
+                  <Skeleton key={i} width="100%" height="18rem" borderRadius="10px" />
                 ))}
           </span>
         </Fieldset>
         {albums
           ? albums.map((album) => (
-              <Fieldset legend={album.name}>
+              <Fieldset key={album.id} legend={album.name}>
                 <span className="grid grid-cols-1 md:grid-cols-3 gap-3">
                   {album.images.map((img) => (
                     <Image
+                      key={img.id}
                       src={img.url}
                       imageClassName="shadow-md border-2 rounded-md"
                       width="100%"
@@ -72,15 +74,15 @@ function Photos() {
                 </span>
               </Fieldset>
             ))
-          : Array.from({ length: 2 }, () => (
-              <Fieldset
+          : Array.from({ length: 2 }, (_, i) => (
+              <Fieldset key={i}
                 legend={
                   <Skeleton width="6rem" height="1rem" borderRadius="10px" />
                 }
               >
                 <span className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                  {Array.from({ length: 3 }, () => (
-                    <Skeleton width="100%" height="15rem" borderRadius="10px" />
+                  {Array.from({ length: 3 }, (_, i) => (
+                    <Skeleton key={i} width="100%" height="15rem" borderRadius="10px" />
                   ))}
                 </span>
               </Fieldset>

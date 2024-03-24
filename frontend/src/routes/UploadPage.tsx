@@ -18,7 +18,7 @@ function UploadPage() {
   const [uploadPhoto] = useUploadAlbumPhotoMutation();
 
   if (!albums) {
-    return <ProgressSpinner></ProgressSpinner>;
+    return <ProgressSpinner/>;
   }
 
   let options = albums.map((album: Album) => ({

@@ -4,16 +4,16 @@ import { Divider } from 'primereact/divider';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../hooks/redux.ts';
 import { Image } from 'primereact/image';
-import { FormEvent, useRef, useState } from 'react';
+import {FormEvent, RefObject, useRef, useState} from 'react';
 import { InputText } from 'primereact/inputtext';
 import { FileUpload } from 'primereact/fileupload';
 import { Toast } from 'primereact/toast';
 import { Password } from 'primereact/password';
 
 function Home() {
-  const toast = useRef<Toast>(null);
+  const toast: RefObject<Toast> = useRef<Toast>(null);
   const navigate: NavigateFunction = useNavigate();
-  const user = useAppSelector((state) => state.auth.user)!;
+  const user: User = useAppSelector((state) => state.auth.user)!;
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [selectedPhoto, setSelectedPhoto] = useState<File>();
 
@@ -23,11 +23,11 @@ function Home() {
     const form: FormData = new FormData(e.currentTarget);
 
     if (selectedPhoto) {
-      const buffer = await selectedPhoto!.arrayBuffer();
+      const buffer = await selectedPhoto.arrayBuffer();
       const blob: Blob = new Blob([buffer], {
-        type: selectedPhoto!.type,
+        type: selectedPhoto.type,
       });
-      form.append('image', blob, selectedPhoto!.name);
+      form.append('image', blob, selectedPhoto.name);
     }
 
     const res = await fetch(
@@ -59,26 +59,6 @@ function Home() {
   }
 
   async function handleSignOut() {
-    /*
-    const res = await fetch(
-      import.meta.env.VITE_BACKEND_URL.concat('/v1/auth/signout'),
-      {
-        method: 'GET',
-        headers: {
-          'Authorization': 'Bearer ' + sessionStorage.getItem('accessToken') ?? ''
-        }
-      },
-    );
-
-    if (!res.ok) {
-      toast.current!.show({
-        severity: 'error',
-        summary: 'Error',
-        detail: 'Cannot sign out',
-      });
-      return;
-    }
-     */
     sessionStorage.removeItem('accessToken');
 
     toast.current!.show({
@@ -155,13 +135,13 @@ function Home() {
                   required
                 />
               </div>
-              <Button label="Save" type="submit"></Button>
+              <Button label="Save" type="submit"/>
               <Button
                 label="Cancel"
                 type="button"
                 severity="danger"
                 onClick={() => setIsEditing(false)}
-              ></Button>
+              />
             </form>
           ) : (
             <>
@@ -173,12 +153,12 @@ function Home() {
                 <Button
                   label="Edit profile"
                   onClick={() => setIsEditing(true)}
-                ></Button>
+                />
                 <Button
                   label="Sign out"
                   severity="danger"
                   onClick={handleSignOut}
-                ></Button>
+                />
               </span>
             </>
           )}
@@ -189,17 +169,17 @@ function Home() {
             label="See photos"
             severity="secondary"
             onClick={() => navigate('/photos')}
-          ></Button>
+          />
           <Button
             label="Upload photo"
             severity="secondary"
             onClick={() => navigate('/upload')}
-          ></Button>
+          />
           <Button
             label="Edit albums"
             severity="secondary"
             onClick={() => navigate('/albums')}
-          ></Button>
+          />
         </div>
       </Card>
     </main>

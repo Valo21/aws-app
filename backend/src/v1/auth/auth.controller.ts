@@ -1,10 +1,19 @@
-import {Body, Controller, Get, Post, Req, Res, UploadedFile, UseGuards, UseInterceptors,} from '@nestjs/common';
-import {AuthService} from './auth.service';
-import {CreateUserDto} from '../users/dto/create-user.dto';
-import {FileInterceptor} from '@nestjs/platform-express';
-import {SignInDto} from './dto/sign-in.dto';
-import {Request, Response} from 'express';
-import {JwtAuthGuard} from './jwt-auth.guard';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Req,
+  UploadedFile,
+  UseGuards,
+  UseInterceptors,
+} from '@nestjs/common';
+import { AuthService } from './auth.service';
+import { CreateUserDto } from '../users/dto/create-user.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { SignInDto } from './dto/sign-in.dto';
+import { Request } from 'express';
+import { JwtAuthGuard } from './jwt-auth.guard';
 
 @Controller('v1/auth')
 export class AuthController {
@@ -26,17 +35,14 @@ export class AuthController {
   }
 
   @Post('signin')
-  public async signIn(
-    @Body() signInDto: SignInDto,
-    @Req() req: Request,
-  ) {
+  public async signIn(@Body() signInDto: SignInDto) {
     const accessToken = await this.authService.signIn(
       signInDto.username,
       signInDto.password,
     );
     return {
-      accessToken
-    }
+      accessToken,
+    };
   }
 
   @UseGuards(JwtAuthGuard)

@@ -3,5 +3,6 @@ import { UploaderService } from './uploader.service';
 
 @Module({
   providers: [UploaderService],
+  exports: [UploaderService],
 })
 export class UploaderModule {}

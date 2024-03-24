@@ -24,7 +24,7 @@ function AlbumsPage() {
   const [addAlbum] = useAddAlbumMutation();
 
   if (!albums) {
-    return <ProgressSpinner></ProgressSpinner>;
+    return <ProgressSpinner/>;
   }
 
   const options: Pick<Album, 'id' | 'name'>[] = albums.map((album) => ({

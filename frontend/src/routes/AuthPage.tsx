@@ -133,9 +133,10 @@ function AuthPage() {
                 id="password"
                 name="password"
                 aria-describedby="password-help"
-                placeholder="saquenmedelatam"
+                placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;"
                 toggleMask
                 required
+                autoComplete='on'
               />
             </div>
           </span>
@@ -215,9 +216,10 @@ function AuthPage() {
               id="password"
               name="password"
               aria-describedby="password-help"
-              placeholder="saquenmedelatam"
+              placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;"
               toggleMask
               required
+              autoComplete='on'
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -227,9 +229,10 @@ function AuthPage() {
               id="rpassword"
               name="rpassword"
               aria-describedby="repeat-password-help"
-              placeholder="saquenmedelatam"
+              placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;"
               toggleMask
               required
+              autoComplete='on'
             />
           </div>
           <p>

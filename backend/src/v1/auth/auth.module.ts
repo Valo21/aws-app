@@ -7,21 +7,19 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from '../users/entities/user.entity';
 import { UploaderService } from '../uploader/uploader.service';
 import { JwtModule } from '@nestjs/jwt';
-import { ConfigModule } from '@nestjs/config';
 import { ProfilePhotosService } from '../profile-photos/profile-photos.service';
 import { ProfilePhoto } from '../profile-photos/entities/profile-photo.entity';
+import * as process from 'process';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-      envFilePath: [`${process.env.NODE_ENV}.env`],
-    }),
     TypeOrmModule.forFeature([User, ProfilePhoto]),
-    JwtModule.register({
+    JwtModule.registerAsync({
       global: true,
-      secret: 'Mysecret',
-      signOptions: { expiresIn: '7d' },
+      useFactory: () => ({
+        secret: process.env.JWT_SECRET,
+        signOptions: { expiresIn: '7d' },
+      }),
     }),
   ],
   controllers: [AuthController],
