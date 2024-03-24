@@ -9,7 +9,7 @@ export const photosApi = createApi({
       'Authorization': 'Bearer ' + sessionStorage.getItem('accessToken') ?? ''
     }
   }),
-  tagTypes: ['Album', 'Image'],
+  tagTypes: ['Album', 'Image', 'User'],
   endpoints: (builder) => ({
     getUserAlbums: builder.query<Album[], string>({
       query: (id) => `/users/${id}/albums`,
@@ -52,6 +52,9 @@ export const photosApi = createApi({
         method: 'DELETE',
       }),
       invalidatesTags: ['Album']
+    }),
+    updateUserDetails: builder.mutation<Album[], null>({
+      query: () => `/auth`,
     }),
   }),
 });

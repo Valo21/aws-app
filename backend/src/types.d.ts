@@ -8,6 +8,6 @@ declare namespace Express {
     };
     session: {
       accessToken: string | null;
-    }
+    };
   }
 }
