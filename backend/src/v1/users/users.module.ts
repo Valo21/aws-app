@@ -4,13 +4,17 @@ import { UsersController } from './users.controller';
 import { User } from './entities/user.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { JwtStrategy } from '../auth/jwt.strategy';
-import { UploaderService } from '../uploader/uploader.service';
-import { ProfilePhotosService } from '../profile-photos/profile-photos.service';
-import { ProfilePhoto } from '../profile-photos/entities/profile-photo.entity';
+import { ProfilePhotosModule } from '../profile-photos/profile-photos.module';
+import { UploaderModule } from '../uploader/uploader.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User, ProfilePhoto])],
+  imports: [
+    TypeOrmModule.forFeature([User]),
+    ProfilePhotosModule,
+    UploaderModule,
+  ],
   controllers: [UsersController],
-  providers: [UsersService, JwtStrategy, UploaderService, ProfilePhotosService],
+  providers: [UsersService, JwtStrategy],
+  exports: [TypeOrmModule, UsersService],
 })
 export class UsersModule {}

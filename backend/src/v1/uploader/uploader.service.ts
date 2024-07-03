@@ -21,21 +21,17 @@ export class UploaderService {
     const name: string = this.generateFileName(fileName);
     const path: string = `profile-images/${username}/${name}`;
 
-    await this.s3Client.send(
-      new PutObjectCommand({
-        Bucket: process.env.AWS_S3_NAME,
-        Key: path,
-        Body: buffer,
-      }),
-    );
-
-    return process.env.AWS_S3_URL.concat(path);
+    return await this.uploadFileToS3(path, buffer);
   }
 
   public async uploadImage(fileName: string, buffer: Buffer): Promise<string> {
     const name: string = this.generateFileName(fileName);
     const path: string = `images/${name}`;
 
+    return await this.uploadFileToS3(path, buffer);
+  }
+
+  async uploadFileToS3(path: string, buffer: Buffer) {
     await this.s3Client.send(
       new PutObjectCommand({
         Bucket: process.env.AWS_S3_NAME,
@@ -43,7 +39,6 @@ export class UploaderService {
         Body: buffer,
       }),
     );
-
     return process.env.AWS_S3_URL.concat(path);
   }
 }

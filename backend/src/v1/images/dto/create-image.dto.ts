@@ -1,6 +1,8 @@
+import { IsNotEmpty } from 'class-validator';
+
 export class CreateImageDto {
+  @IsNotEmpty()
   name: string;
-  url: string;
+  @IsNotEmpty()
   album: string;
-  userId: string;
 }
